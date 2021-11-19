@@ -20,7 +20,6 @@ const limiter = rateLimit({
 
 const WHITELIST =
   process.env.WHITELIST === "*" ? "*" : JSON.parse(process.env.WHITELIST);
-console.log(WHITELIST);
 const corsConfig = {
   credentials: true,
   exposedHeaders: ["set-cookie"],
