@@ -1,7 +1,7 @@
 const { Router } = require("express");
-const passport = require("passport");
 const router = Router();
-const authRouter = require("./auth");
+const passport = require("../auth/config");
+const authRouter = require("../auth/router");
 const crudRouter = require("./crud");
 
 router.use(
