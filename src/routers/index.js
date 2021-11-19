@@ -4,7 +4,11 @@ const router = Router();
 const authRouter = require("./auth");
 const crudRouter = require("./crud");
 
-router.use("/auth", authRouter);
-router.use("/", passport.authenticate("jwt", { session: false }), crudRouter);
+router.use(
+  "/auth",
+  passport.authenticate("jwt", { session: false }),
+  authRouter
+);
+router.use("/", crudRouter);
 
 module.exports = router;
