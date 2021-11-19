@@ -9,8 +9,9 @@ const main = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-  } catch {
-    console.log("Error");
+    console.log("Successfully connected to database");
+  } catch (err) {
+    console.error("Can't connected to database:", err);
   }
 };
 
