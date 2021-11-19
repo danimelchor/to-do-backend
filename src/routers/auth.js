@@ -18,12 +18,13 @@ const cookieExtractor = (req) => {
   return token;
 };
 
-const PRIV_KEY =
-  process.env.PRIV_KEY ||
-  fs.readFileSync(__dirname + "/../../cert/private.pem", "utf8");
-const PUB_KEY =
-  process.env.PUB_KEY ||
-  fs.readFileSync(__dirname + "/../../cert/public.pem", "utf8");
+// Key loading
+var PRIV_KEY = process.env.PRIV_KEY;
+if (PRIV_KEY === undefined)
+  PRIV_KEY = fs.readFileSync(__dirname + "/../../cert/private.pem", "utf8");
+var PUB_KEY = process.env.PUB_KEY;
+if (PUB_KEY === undefined)
+  PUB_KEY = fs.readFileSync(__dirname + "/../../cert/public.pem", "utf8");
 
 const opts = {
   jwtFromRequest: cookieExtractor,
