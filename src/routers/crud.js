@@ -36,6 +36,26 @@ router.post("/tab", async (req, res) => {
     });
 });
 
+// EDIT TAB NAME
+router.put("/tab", async (req, res) => {
+  const { tabId, title } = req.body;
+
+  Tab.updateOne(
+    { _id: tabId },
+    {
+      $set: { title },
+    }
+  )
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .json({ ok: false, error: "Please choose a valid tab and name." });
+    });
+});
+
 // DELETE A TAB
 router.delete("/tab", async (req, res) => {
   const { tabId } = req.body;
