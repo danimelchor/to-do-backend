@@ -4,11 +4,7 @@ const passport = require("../auth/config");
 const authRouter = require("../auth/router");
 const crudRouter = require("./crud");
 
-router.use(
-  "/auth",
-  passport.authenticate("jwt", { session: false }),
-  authRouter
-);
-router.use("/", crudRouter);
+router.use("/auth", authRouter);
+router.use("/", passport.authenticate("jwt", { session: false }), crudRouter);
 
 module.exports = router;

@@ -1,5 +1,7 @@
 const { Router } = require("express");
 const router = Router();
+const jwt = require("jsonwebtoken");
+const { PRIV_KEY } = require("./keys");
 
 const genToken = () => {
   const maxAge = 1000 * 60 * 60 * 24 * 30;
@@ -17,10 +19,6 @@ const genToken = () => {
   return { maxAge, jwt_token };
 };
 
-router.get("/whoami", (req, res, next) => {
-  res.status(200).json({ user: req.user });
-});
-
 router.post("/login", (req, res) => {
   const { password } = req.body;
 
@@ -30,7 +28,7 @@ router.post("/login", (req, res) => {
       httpOnly: true,
       encode: String,
       secure: process.env.PRODUCTION || false,
-      sameSite: "None",
+      sameSite: process.env.PRODUCTION ? "None" : "Strict",
       maxAge,
     });
     res.status(200).json({ ok: true, msg: "Authenticated" });

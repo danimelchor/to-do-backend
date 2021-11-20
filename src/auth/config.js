@@ -1,7 +1,6 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
-const fs = require("fs");
+const { PUB_KEY } = require("./keys");
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -16,14 +15,6 @@ const cookieExtractor = (req) => {
   if (req && req.cookies) token = req.cookies["jwt"];
   return token;
 };
-
-// Key loading
-var PRIV_KEY = process.env.PRIV_KEY;
-if (PRIV_KEY === undefined)
-  PRIV_KEY = fs.readFileSync(__dirname + "/../../cert/private.pem", "utf8");
-var PUB_KEY = process.env.PUB_KEY;
-if (PUB_KEY === undefined)
-  PUB_KEY = fs.readFileSync(__dirname + "/../../cert/public.pem", "utf8");
 
 const opts = {
   jwtFromRequest: cookieExtractor,

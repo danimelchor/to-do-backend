@@ -3,7 +3,6 @@ const express = require("express");
 const morgan = require("morgan");
 
 // Security
-const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -36,6 +35,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan(process.env.PRODUCTION ? "combined" : "dev"));
+
+// Auth
+const passport = require("./auth/config");
 app.use(passport.initialize());
 
 // Database config

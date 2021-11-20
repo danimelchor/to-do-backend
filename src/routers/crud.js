@@ -3,6 +3,11 @@ const router = Router();
 
 const Tab = require("../database/models/Tab");
 
+// TESTING IF AUTHENTICATED
+router.get("/whoami", (req, res) => {
+  res.status(200).json({ user: req.user });
+});
+
 // GET ALL TABS
 router.get("/", (req, res) => {
   Tab.find()
