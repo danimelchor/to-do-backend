@@ -21,7 +21,6 @@ const WHITELIST =
   process.env.WHITELIST === "*" ? "*" : JSON.parse(process.env.WHITELIST);
 const corsConfig = {
   credentials: true,
-  exposedHeaders: ["set-cookie"],
   origin: WHITELIST,
 };
 
