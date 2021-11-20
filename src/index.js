@@ -17,11 +17,9 @@ const limiter = rateLimit({
   },
 });
 
-const WHITELIST =
-  process.env.WHITELIST === "*" ? "*" : JSON.parse(process.env.WHITELIST);
 const corsConfig = {
   credentials: true,
-  origin: WHITELIST,
+  origin: "*",
 };
 
 // Config
