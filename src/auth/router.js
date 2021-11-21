@@ -30,7 +30,6 @@ router.post("/login", (req, res) => {
       secure: true,
       sameSite: "None",
       maxAge,
-      domain: process.env.FRONTEND,
     });
     res.status(200).json({ ok: true, msg: "Authenticated" });
   } else {
