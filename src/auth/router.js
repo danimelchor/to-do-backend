@@ -27,8 +27,8 @@ router.post("/login", (req, res) => {
     res.cookie("jwt", jwt_token, {
       httpOnly: true,
       encode: String,
-      secure: process.env.PRODUCTION || false,
-      sameSite: process.env.PRODUCTION ? "None" : "Strict",
+      secure: true,
+      sameSite: "None",
       maxAge,
     });
     res.status(200).json({ ok: true, msg: "Authenticated" });

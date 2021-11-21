@@ -113,4 +113,23 @@ router.put("/task", (req, res) => {
     });
 });
 
+// COMPLETE A NEW TASK
+router.delete("/task", (req, res) => {
+  const { taskId, tabId } = req.body;
+
+  Tab.updateOne(
+    { _id: tabId },
+    {
+      $pull: { tasks: { _id: taskId } },
+    }
+  )
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ ok: false, error: "Please choose a valid task." });
+    });
+});
+
 module.exports = router;

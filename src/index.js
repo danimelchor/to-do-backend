@@ -19,7 +19,7 @@ const limiter = rateLimit({
 
 const corsConfig = {
   credentials: true,
-  origin: "*",
+  origin: JSON.parse(process.env.WHITELIST),
 };
 
 // Config
