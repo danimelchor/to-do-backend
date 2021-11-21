@@ -20,18 +20,20 @@ const genToken = () => {
 };
 
 router.post("/login", (req, res) => {
-  const { password } = req.body;
+  const { password, type } = req.body;
 
   if (password === process.env.PASSWORD) {
     const { jwt_token, maxAge } = genToken();
     res.cookie("jwt", jwt_token, {
       httpOnly: true,
       encode: String,
-      secure: true,
+      secure: process.env.PRODUCTION ? true : false,
       sameSite: "None",
       maxAge,
     });
-    res.status(200).json({ ok: true, msg: "Authenticated" });
+
+    if (type === "react") res.redirect(process.env.FRONTEND);
+    else res.status(200).json({ ok: true, msg: "Authenticated" });
   } else {
     res.status(403).json({ ok: false, error: "The password is incorrect." });
   }
